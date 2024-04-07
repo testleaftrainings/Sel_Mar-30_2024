@@ -1,0 +1,195 @@
+ Agenda:Week2.day2 
+
+02:15 to 02:30 : Recap 
+02:30 to 03:15 : DropDown(Select Class)
+03:15 to 04:15 : Xpath
+04:15 to 04:30 : BreakOut
+04:30 to 04:45 : Break
+04:45 to 05:30 : Advance Xpath 
+05:30 to 05:55 : Breakout +Break
+05:55 to 06:30 : Advance Xpath
+
+
+
+
+Dropdown:
+What is a Dropdown?
+
+A dropdown in web development is a user interface element that allows users to select one option from a list of options.
+In HTML, this is structured with a <select> tag as the parent element and <option> elements as children.
+Selenium must be able to interact with these elements to test web applications thoroughly.
+How to Handle Dropdown?
+
+Selenium provides a Select class specifically for interacting with dropdown elements.
+The Select class offers methods to select options within a dropdown easily.
+When to Use?
+
+The Select class should be used when an element in the DOM is identified with a <select> tag, indicating a dropdown menu.
+<select> Structure in DOM
+
+The <select> tag in the DOM represents the dropdown element,
+and the nested <option> tags represent the individual choices available to the user.
+How to Use Select Class?
+
+To use the Select class, a Selenium script must first identify the <select> element in the DOM.
+Then, an instance of the Select class is created by passing the located WebElement as an argument to its constructor.
+This allows the script to manipulate the dropdown as needed.
+Helper Methods
+
+The Select class provides various methods to select options from a dropdown, such as:
+selectByIndex(index): Selects an option by its index in the dropdown, starting with 0.
+selectByVisibleText("text"): Selects an option by the text visible to the user in the dropdown.
+selectByValue("value"): Selects an option by the value of its value attribute.
+
+
+
+
+Xpath:
+XML Path
+Xpath-XML Path
+
+
+Absolute XPath: It starts from the root (html) and traverses down to the desired element, 
+detailing every single element in the hierarchy. The path starts with a single forward slash /, 
+indicating the root. For example: /html/body/div[2]/div[2]/div/form/p[1]/input. `.
+ ex: /html/body/div[2]/div[2]/div/form/p/input
+ex: /html/body/div[2]/div[2]/div/form/p/input
+
+
+
+
+
+Relative XPath: It starts from anywhere within the document and typically focuses on 
+identifying elements based on attributes, indexes, or specific tags, not necessarily 
+detailing the entire path from the root. It starts with a double forward slash //,
+ indicating the search can begin anywhere. For example: //input[@id=‘username’].
+
+
+
+Relative Xpath:
+
+a.Basic xpath
+Attribute based xPath: Syntax: //tagname[@attributename='attributeValue'] 
+Example:  //input[@id='password'] //input[@id='twotabsearchtextbox']
+//input[@class='decorativeSubmit']
+//input[@id='inputValEnter']
+//input[@id='username']
+//input[@name='firstname']
+
+
+Text based xPath: Syntax: //tagname[text()='textvalue'] 
+Example:  //a[text()='Leads'] 
+//span[text()='Hello, sign in']
+
+
+Partial Attribute based xpath: Syntax: //tagname[contains(@attributename,'partialattributevalue')] 
+Example: //input[contains(@class,'decorative')] 
+//input[contains(@id,'twotab')]
+ //input[contains(@id,'search')]
+ //input[contains(@id,'firstName')]
+
+Partial Text based xpath:
+Syntax: //tagname[contains(text(),'partialtextvalue')]
+  Example: //a[contains(text(),'SFA')]
+          //span[contains(text(),'Hello')]
+          //a[contains(text(),'Smartphones')]
+          //a[contains(text(),'CRM/SFA')]
+          //span[contains(text(),'Here’s')]
+
+Index based xpath:
+ Syntax: (//tagname[@attributename='attributeValue'])[2]
+(//tagname[text()='textvalue'])[3] Example: (//a[contains(text(),'Lead')])[3] 
+
+(//tagname[@attr='attr value'])[4]
+*you should not  go beyond index as 5*
+(//span[contains(text(),'Fashion')])[2]
+(//span[contains(text(),'Here’s')])[3]
+(//input[@class='inputBox'])[5]
+
+
+
+
+
+
+
+
+
+Advance Xpath:
+
+Parent to Child
+
+           Basic Xpath parent / tagname of child
+Ex: //p[@class='top']/input
+    //div[@class='col-xs-14 search-box-wrapper']/input
+    //a[@class='nav-a nav-hasArrow']/span
+
+    //div[@id='username_container']/input
+
+GrandParent to GrandChild:
+Basic Xpath for Gp//tagname of Gc
+ex:    (//form[@id='login']//input)[2]
+   //form[@id='login']//input[@id='password']
+
+   //div[@id='theloginform']//input
+   //div[@id='theloginform']//input[@id='password']
+
+Child to Parent:
+
+Basic Xpath Child/parent::tagname of parent
+//input[@id='inputValEnter']/parent::div
+//input[@id='email']/parent::div
+//input[@id='Login']/parent::form
+
+GrandChild to GrandParent :
+Basic xpath for GC/::ancestortagname of GP
+//input[@class='decorativeSubmit']/ancestor::form
+//a[text()='Best Sellers']/ancestor::div[@id='nav-xshop-container']
+
+
+
+
+1:https://www.snapdeal.com/
+   cart -xpath
+   footwear- xpath
+
+ 2.https://www.amazon.in/
+ Today's Deals 
+
+
+ Elder sibling to youngerSibling:
+
+ Basic xpath Elder sibling/following-sibling::tagname Ys
+ //label[text()='Username']/following-sibling::input
+
+ Younger sibling to Elder sibling:
+ Basic xpath Younger sibling/preceding-sibling::tagname of Es
+ //input[@id='username']/preceding-sibling::label
+
+ Elder cousin to younger cousin:
+ Basic xpat Elder Cousin/following::tagname of Yc
+ //input[@id='Login']/following::input
+
+ Younger cousin to Elder Cousin:
+ Basic xpath Younger cousin /preceding::tagname of EC
+ //input[@id='rememberUn']/preceding::input[@id='Login']
+
+
+
+
+
+
+
+ Wait:
+  Java wait -Thread.sleep(2000); it will wait till time given to be completed
+
+  Selenium wait :
+  1.Implicit wait
+  2.Explicit wait
+
+  Implicit wait :
+  10mins
+
+  at 7mins
+  its common for both findElement and findElements
+
+  
