@@ -1,0 +1,104 @@
+
+ Agenda:Week4.day2 
+
+02:30 to 03:15  : Window Handling
+03:15 to 03:35  : BreakOut
+03:35 to 04:35  : Advanced User Interactions (Action class )
+04:35 to 05:10  : Breakout(20mins)+Break(10mins)
+05:10 to 05:50  : Snapshot,ChromeOptions,Advance Xpath
+05:50 to 05:55  : Break(5mins)
+05:55 to 06:30  : WebTable
+
+
+Window Handling:
+getwindowHandle()
+getwindowHandles()
+
+syntax:
+driver.switchTo().Window();
+
+
+
+Action Class:
+
+
+
+
+
+https://swisnl.github.io/jQuery-contextMenu/demo.html 
+https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_ondblclick
+https://www.ajio.com/
+https://www.snapdeal.in/
+https://www.leafground.com/drag.xhtml
+
+
+
+1.
+https://www.ajio.com/
+mouseover on -Men
+
+2.
+https://jqueryui.com/droppable/
+drag and drop
+
+
+
+
+
+
+
+
+
+
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.11.0</version>
+</dependency>
+
+SnapShpot:
+
+step -1 : create folder inside your project
+
+step -2: driver.getScreenShotAs(OutputType.File);
+
+step -3: File obj=new File("./snap/img.png");
+
+step -4: merge file-  FileUtils.copyFile(src,dst);
+
+
+
+
+
+
+
+
+
+WebTable:
+
+<table>- data name or information
+<tbody>- table body
+<tr> -table row data
+<td> - table column data
+<th> - table header
+
+
+<table>
+    <thead>
+      <tr>  </tr>
+      <tr>   </tr>
+      </thead>
+
+    <tbody>
+
+    <tr>
+      <td>
+      <td>  
+    </tr>
+    <tr>
+     <td>
+     </tr>
+   </tboby>
+
+</table>       
