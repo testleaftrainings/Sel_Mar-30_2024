@@ -1,0 +1,103 @@
+Todays Agenda: 
+02:30 - 03:30 -> Static Parameterization
+03:30 - 03:50 -> Breakout 
+03:50 - 04:00 -> Break
+04:00 - 04:40 -> Dynamic Parameterization
+04:40 - 05:10 -> Breakout 
+05:10 - 05:50 -> Read Excel Program
+05:50 - 06:05 -> Breakout
+06:05 - 06:30 -> Common Integrations
+
+
+
+Parameterization:
+No hardcoding of data inside the java classes
+Preferred to automate them by passing from an external resource testng.xml, excel...
+
+2 types:
+Static: - If it is common across multiple testcases Example: - url, username, password 
+
+Steps to implement Static Parameterization:
+Identify the data that are common across all the testcases
+Add parameter tag for each datas in the XML file ex:
+url,username,password ,browser
+Map the parameters in the class using @Parameters ex: @Parameters({"url","username","password"})
+Note: The name should exactly match the names in the xml
+Use that parameters inside the method using arguments Note: Sequence matters but the name of the arguments does not matter
+Finally, replace the arguments with the hardcoded values
+Note: You should always run from the xml file when you use parameters
+
+Dynamic Parameterization:
+1.Identify the data that are need to be dynamic for the particular testcase
+ ex: CreateLead : companyName, firstName, lastName, phoneNumber EditLead : phoneNumber,companyName
+2.Create a method sendData and annotate with @Dataprovider annotation and give a name for the DataProvider
+3.Create an Input array with rowCount and columnCount - add datas into the array with index starting from 0
+4.Return data back to the calling method
+5.Receive the data in the testcase uding dataProvider attribute
+6. Pass input arguments to the test method and replace all the hardcoded data
+
+
+row - how many leads need to create
+columns - 4 values i need pass to the testcase
+
+[3][4]-index start with '0'
+
+[0][0]    ="Testleaf"
+[0][1]    ="Dilip"
+[0][2]    ="Kumar"
+[0][3]    ="98"
+
+
+[1][0]
+[1][1]
+
+How to read data from Excel:
+
+its not  mandatory to have excel in system
+
+Excel:
+.xls= -> Microsoft excel spreadsheet
+.xlsx -> Microsoft excel spreadsheet in xml format
+
+XSSF-> XML SpreadSheet Format
+
+
+Step1-> Set path for workbook
+step2-> Get into the sheet
+Step3-> Get into Row values
+Step4-> Get into cell values
+Step5-> Read Data from workbook and print
+Step6-> close the workbook
+
+
+# Steps to do Excel Integration:
+1. Create 2- dimensional array in the ReadEXcel Class with rowCount and columnCount
+String[][] data = new String[rowCount][columnCount];
+2. Push stringCellValue to the Array
+data[i-1][j]=stringCellValue;
+3. Close the workbook and return the data
+wBook.close();
+return data;
+4. Change main method to a normal static method
+public static String[][] readExcel(){
+
+
+}
+5. Inside the testcase within the sendData() call the readExcel() from ReadExcel Class and return the data
+@DataProvider(name="fetchData")
+public String[][] sendData() throws IOException {
+return ReadExcel.readExcel(); 
+6. Move sendData() into the BaseClass and declare a fileName globally
+public String fileName; ------------ > Global declaration
+@DataProvider(name="fetchData")
+public String[][] sendData() throws IOException {
+return ReadExcel.readExcel(fileName); 
+}
+7. Create setValues() inside each testcase and annotate with @BeforeTest and mention the filename here
+@BeforeTest
+public void setValues() {
+fileName="EditLead";
+
+
+} 
+8. Finally , run from the xml file
