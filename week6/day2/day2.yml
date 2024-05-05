@@ -1,0 +1,69 @@
+week6.day2
+
+Todays Agenda: 
+02:30 - 03:15 -> Parameterization 
+03:15 - 03:30 -> Breakout 
+03:30 - 03:40 -> Break
+03:40 - 04:20 -> Hooks Implementation
+04:20 - 04:50 -> Breakout+Break
+04:50 - 05:20 -> Tags
+05:20 - 05:30 -> Break
+05:30 - 06:30 -> WebTable
+
+
+
+
+How to pass multiple data using Scenario Outline:
+1. To pass multiple data for a single scenario the Ghekin keyword used is Scenario Outline
+2. In Scenario Outline identify the dynamic data and replace that with <>
+    ex: <companyname>
+3. Under Examples keyword create pipeline symbol and mention the column name
+   ex: |companyname|
+   Note: The name should exactly match
+    -Pass the values in the second row of Examples
+    ex: |TestLeaf|  (1st set of data)
+        |Qeagle|    (2nd set of data)
+                                                     
+4.Go to the StepDefinition and replace <companyname> with {string}-only string
+5.Pass Input arguments to the method and replace the hardcoded value withe the argument   
+
+
+
+InvalidMethodException:
+  - You're not allowed to extend classes that define Step Definitions or hooks
+
+Hooks Implementation:
+   Cucumber Annotations - > Hooks in Ruby Language
+   its run before the scenario and after scenario
+   Hooks:
+       @Before :
+          -is to have common precondition for each scenario
+        @After : 
+           - is to have common postcondition for each scenario
+
+
+Steps to implement Hooks:
+Create a package called hooks and create a class called HooksImplementation
+Create 2 methods preCondition() and postCondition() and annotate with @Before and @After
+The Hooks class should extends BaseClass
+In the Runner class inside glue attribute mention hooks package as well glue ={"steps","hooks"}
+
+
+io.cucumber.java.InvalidMethodException: 
+	You're not allowed to extend classes that define Step Definitions or hooks. 
+  class stepDefinition.CreateLeadSD extends class stepDefinition.Hooks
+
+
+
+
+
+
+Tags:
+It is used to categorize the scenarios
+
+tags="@smoke" )// only smoke scenarios will be executed 
+tags="not @smoke")// to exclude a scenario from execution
+tags="@smoke or @functional") // To run scenarios that have either of the tags
+tags="@functional and @regression" ) //To run scenarios which has both the tags
+
+
