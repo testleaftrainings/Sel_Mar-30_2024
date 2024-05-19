@@ -1,0 +1,104 @@
+Today Agenda:
+02:30-03:45  Integration POM with Extent Report
+03:50-04:25  Breakout +Break 
+04:25-05:25  Hybrid Framework
+05:25-05:55  Breakout+Break
+05:55-06:40  Automation Challenges
+
+
+Steps to Integrate Extent Report:
+---------------------------------
+1. Create startReport() with @BeforeSuite in BaseClass or PSM and add step1 to step3 code from extent report
+2. Make ExtentReports as global  and static variable
+3. Create stopReport() with @AfterSuite to have extent.flush()
+4. Create testDetails() with @BeforeClass for test case details code
+5. Declare ExtentTest test as global and static variable
+6. Create 4 global variables testName, testDescription, testAuthor and testCategory
+7. Relace the hardcoded values with the respective variable names
+8. Assign the values for the variables in the setValues() in the testcases     
+9. Create reportStep(String stepDetails, String status) in the PSM with conditional implementation for pass / fail
+10. methods in pages should have try / catch implementation
+11. call the reportStep() with pass status from try block & with fail status 
+
+
+
+
+
+
+
+How to setup the framework:
+---------------------------
+1. https://github.com/testleaftrainings/Sel_Mar-30_2024/blob/main/week8/makaia_framework-master.zip
+2. Click on Download icon
+3. Extract the zip the file in your system
+4. Click on File -> Import... in eclipse
+5. Select Existing Maven project -> Next in the wizard
+6. Browse the extracted folder -> Select folder
+7. Click on Finish button in the wizard
+
+
+
+
+https://forms.office.com/r/Sy4LarAF1y 
+
+Hybrid Framework -> TestNG + Cucumber 
+--------------------------------------
+Framework is created using maven project to have better dependency management
+Framework is designed based on Page Object model pattern
+
+External libraries that we used in our framework are
+Selenium WebDriver -> used to interact with the web application
+TestNG -> is used to support controlled test execution
+Apache POI -> is used to read the data from excel and support data driven in our framework
+Cucumber -> is used to support BDD automation if needed
+ExtentReport -> is used to generate HTML summary report
+
+Component:
+com.framework.selenium.api.design
+	Browser (I) -> Used to design the reusable methods required for browser interaction
+	Element (I) -> Used to design the reusable methods required for element interaction
+	Loctors (E) -> Used to declare the locators to be used in the framework
+	
+com.framework.selenium.api.base
+	SeleniumBase -> Implementation class for both Browser and Element interfaces
+				 -> Wrapper class, contains wrapper methods which are created on top of selenium methods
+				 -> library for the automation in our framework
+				 -> Exception handling is commonly implemented in all the methods
+	DriverInstance -> Contains remoteWebdriver declaration and maintenance			 
+com.framework.testng.api.base:
+	ProjectSpecificMethods - Its a base class for all the pages and testcases. It contains all the common methods and variables required for the pages and testcases
+com.leaftaps.pages:
+	All the java classes for each page that we navigate in the application with reusable methods for each action that we do it in respective pages
+com.leaftaps.testcases:
+    All the java classes for each testcase with sequence of the steps
+com.framework.utils:
+	DataLibrary - to read the data from excel
+	Reporter - ExtentReport configuration
+	
+data -> to keep the test data files 
+reports -> to keep the result.html (ExtentReport)
+testng.xml -> which is having the configuration for test execution
+pom.xml -> to have the dependencies and the project details
+
+
+
+Hierarchy of classes in our framework:
+AbstractTestNGCucumberTest
+	DriverInstance
+		Reporter
+			SeleniumBase
+				ProjectSpecificMethods
+					Pages & TestCase
+
+
+Execution Flow of a testcase in our framework:
+@BeforeSuite					-> startReport() [Reporter]
+	@BeforeTest					-> setValues() [TestCase class]
+		@BeforeClass			-> startTestCase() [Reporter]
+			@DataProvider		-> fetchData() [ProjectSpecificMethods]
+				@BeforeMethod	-> preCondition() [ProjectSpecificMethods]
+					@Test		-> runLogin() [TestCase class]
+				@@AfterMethod	-> postCondition() [ProjectSpecificMethods]
+		@AfterClass				-> NA
+	@AfterTest					-> NA
+@AfterSuite						-> endResult() [Reporter]

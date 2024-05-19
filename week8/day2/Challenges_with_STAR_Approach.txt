@@ -1,0 +1,42 @@
+STAR -> Situation Task Action Result
+
+Scenario1: Enhance the file upload code
+
+Situation: We have to upload file in few test cases. We handled the automation using Robot class since selenium can not able to interact with window dialog.
+
+Task: Handling with Robot class is very flaky and not recommened for parallel excution. I was asked to implement better solution
+
+Action: I have explored and talk to the community experts, i came to know that File Upload can be done using sendKeys() when the element is having input tag and type="file" as attribute. In our application file upload is meeting these criteria. 
+
+Result: File upload using sendKeys() is very stable and now we can execute the test cases in parallel mode as well
+
+-------------------------------------------------------
+
+Scenario2: Stale Element Reference Exception
+
+Situation: While automating 400+ tests and running them using Selenium Grid, I noticed several tests failing with Stale Element Reference exception and this caused lot of rework in the test automation project. 
+
+Task: Have to find the rootcause of this problem and fix it [Not having deeper understanding] !! 
+
+Root Cause: When the element was looked for its presence by findElement, the element was there. But it got disappeared, when you were about to interact with the element - sendKeys, click, clear !! 
+
+Action: 
+
+Option 1) Either add sleep statement before find the element [How long?]
+Best Option) Whenever there is stale element reference exception, find the element again !! 
+
+Result:
+
+This solved most of the common failures and the test automation results were helpful to speed up the testing efforts !! You are awarded 'STAR Award' !!
+
+-------------------------------------------------------
+
+Scenario3: Enhance framework with dynamic test data
+
+Situation: We are using Excel to keep the data. Which is providing static data to the test cases. Client has raised this a concern as data whatever we create using automation looks like junk data in data base
+
+Task: I was asked to implement dynamic data for the test cases
+
+Action: I have explored APIs and libraries to dynamic data  and implemented faker one of the java library. Faker is very simple and easy to implement in our framework. 
+
+Result: Data created using Faker is dynamic and looks like real data.
